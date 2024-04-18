@@ -10,6 +10,7 @@ export default function Model(props) {
   const { nodes, materials } = useGLTF('/pillBottle3.glb')
   const [center, setCenter] = useState(new THREE.Vector3(0,0,0))
   const [hovered, setHovered] = useState(false)
+  const [active, setActive] = useState(true)
   const { scale } = useSpring({ scale: hovered ? [1.5, 1.6, 1.5] : [1, 1.1, 1] })
   const { position } = useSpring({ position: hovered ? [0,  -0.7,  -0.5] :[0, 0, 0] })
   const texture = useTexture("/lables_jpeg/" + props.path)
@@ -31,16 +32,16 @@ export default function Model(props) {
   })
 
   return (
-    <group ref={contRef} position={props.pos} >
+    <group ref={contRef} position={props.pos} onClick={() => setActive(!active)} >
     <a.group ref={groupRef} {...props} dispose={null} position={position} onPointerEnter={() => setHovered(true)} scale={scale} onPointerLeave={() => setHovered(false)}  >
       <mesh geometry={nodes.Circle001.geometry} >
-        <meshPhysicalMaterial side={THREE.DoubleSide} roughness={0.2} />
+        <meshPhysicalMaterial side={THREE.DoubleSide} roughness={0.1} color={active ? "lightblue" : "white"} transmission={active ? 1 : 0} thickness={0.5}/>
       </mesh>
       <mesh geometry={nodes.Circle_1.geometry} material={materials.img_mat}>
         <meshPhysicalMaterial map={texture} />
       </mesh>
-      <mesh geometry={nodes.Circle_2.geometry} material={materials.material1}>
-        <meshPhysicalMaterial roughness={0.2} />
+      <mesh geometry={nodes.Circle_2.geometry} material={materials.material1}  >
+        <meshPhysicalMaterial roughness={0.1} color={active ? "lightblue" : "white"} transmission={active ? 1 : 0} thickness={0.5}/>
       </mesh>
     </a.group>
     </group>
