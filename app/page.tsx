@@ -1,12 +1,14 @@
 "use client"
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-// import Model from "@/components/Untitled.jsx";
 import Model from "@/components/PillBottle3.jsx";
 import { useEffect, useState } from "react";
+import styles from "@/app/page.module.css";
 export default function Home() {
   const [scrollY, setScrollY] = useState<Number>(-1)
   const [titles, setTitles] = useState<String[]>([])
+  const [isMaskVisible, setIsMaskVisible] = useState(false)
+
   useEffect(() => {
     window.onscroll = () => {
       setScrollY(window.scrollY /100 )
@@ -19,6 +21,11 @@ export default function Home() {
   
   return (
     <main className="w-full h-[700vh]">
+      {/* <div className={styles.mask}>
+        <div className=" bg-slate-900 w-screen h-screen">
+          testtttt
+        </div>
+      </div> */}
       <div className="h-screen w-full fixed">
       <Canvas camera={{zoom: 100}} orthographic>
         <spotLight position={[0, 0, 20]} angle={1} penumbra={0.5} intensity={500}/>
@@ -29,24 +36,18 @@ export default function Home() {
           const offset = renderWidth / (noOfModels * 2)
           if(index % noOfModels === 0){
             const runningcount = index
-            //SKETCH AZ HELL
-            if(runningcount + 5 > titles.length) return
-          console.log("hit")
           return (
             <group key={index} position-y = { - ((index / noOfModels) * 5) }>
         
               {Array.from({ length: noOfModels }, (v, i) => {
                 // Calculate the position for each model
                 const position = offset + i * ( renderWidth / (noOfModels)) - (renderWidth / 2)
+                if (titles[runningcount + i % noOfModels]){
                 return (
-                  <Model key={i} pos={[position, scrollY, 0]} path={titles[runningcount + i % noOfModels]} />
-                );
+                  <Model key={i} pos={[position, scrollY, 0]} path={titles[runningcount + i % noOfModels]} onClick={() => setIsMaskVisible(true)} />
+                  );}
+                else return null
               })}
-              {/* <Model pos={[-7,scrollY,0]} path={titles[runningcount]}/>
-              <Model pos={[-3.5,scrollY,0]} path={titles[runningcount +1]}/>
-              <Model pos={[0,scrollY,0]} path={titles[runningcount +2]}/>
-              <Model pos={[3.5,scrollY,0]} path={titles[runningcount +3]}/>
-              <Model pos={[7,scrollY,0]} path={titles[runningcount +4]}/> */}
             </group>
           )}
         })}

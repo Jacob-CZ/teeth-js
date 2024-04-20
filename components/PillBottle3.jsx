@@ -12,7 +12,6 @@ export default function Model(props) {
   const [active, setActive] = useState(false)
   const { scale } = useSpring({ scale: hovered ? [1.5, 1.6, 1.5] : [1, 1.1, 1] })
   const { position } = useSpring({ position: hovered ? [0,  -0.7,  -0.5] :[0, 0, 0] })
-  const { transmission } = useSpring({ transmission: active ? 1 : 0 })
   const texture = useTexture("/lables_jpeg/" + props.path)
   texture.flipY = false
   useEffect(() => {
@@ -33,19 +32,16 @@ export default function Model(props) {
 
   
   return (
-    <group ref={contRef} position={props.pos} onClick={() => {setActive(!active); props.onClick}}>
+    <group ref={contRef} position={props.pos} onClick={props.onClick}>
       <a.group ref={groupRef} {...props} dispose={null} position={position} onPointerEnter={() => setHovered(true)} scale={scale} onPointerLeave={() => setHovered(false)}  >
         <mesh geometry={nodes.Circle001.geometry} >
-          <a.meshPhysicalMaterial side={THREE.DoubleSide} roughness={0.1}  transmission={transmission} thickness={0.5}/>
+          <meshStandardMaterial side={THREE.DoubleSide} roughness={0.1}  />
         </mesh>
         <mesh geometry={nodes.Circle_1.geometry} material={materials.img_mat}>
-          <a.meshPhysicalMaterial map={texture}  opacity={active ? 0 : 1} transparent/>
-        </mesh>
-        <mesh geometry={nodes.Circle_1.geometry}>
-          <a.meshPhysicalMaterial roughness={0.1} transmission={transmission} thickness={0.5} />
+          <meshStandardMaterial map={texture} roughness={0} transparent/>
         </mesh>
         <mesh geometry={nodes.Circle_2.geometry} material={materials.material1}  >
-          <a.meshPhysicalMaterial roughness={0.1}  transmission={transmission} thickness={0.5}/>
+          <meshStandardMaterial roughness={0.1}/>
         </mesh>
       </a.group>
     </group>
