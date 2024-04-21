@@ -28,10 +28,12 @@ export default function Home() {
       </div> */}
       <div className="h-screen w-full fixed">
       <Canvas camera={{zoom: 100}} orthographic shadows>
-        <OrbitControls />
-        <Plane scale={20} position={[0,0,-5]} receiveShadow>
+        {/* <OrbitControls /> */}
+        <Plane scale={20} position={[0,0,-3]} receiveShadow>
+          <meshStandardMaterial color="white" />
         </Plane>
-        <spotLight position={[0, 0, 20]} angle={1} penumbra={0.5} intensity={500} castShadow/>
+        <spotLight position={[0, 0, 20]} angle={1} penumbra={0.5} intensity={500} castShadow shadow-mapSize-width={2048 * 2} 
+        shadow-mapSize-height={2048 * 2}/>
         <ambientLight intensity={0.6}/>
         {titles.map((product, index) => {
           const noOfModels = Math.floor(window.innerWidth / 384)

@@ -12,7 +12,8 @@ export default function Model(props) {
   const [active, setActive] = useState(false)
   const { scale } = useSpring({ scale: hovered ? [1.5, 1.6, 1.5] : [1, 1.1, 1] })
   const { position } = useSpring({ position: hovered ? [0,  -0.7,  -0.5] :[0, 0, 0] })
-  const texture = useTexture("/lables_jpeg/" + props.path)
+  const texture = useTexture("/labels_out/" + props.path)
+  useTexture.preload("/labels_out/" + props.path)
   texture.flipY = false
   useEffect(() => {
     if (groupRef.current) {

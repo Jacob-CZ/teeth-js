@@ -36,3 +36,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+#extra img
+public/extra_labels
+public/labels_compressed
+public/lables_jpeg
+
