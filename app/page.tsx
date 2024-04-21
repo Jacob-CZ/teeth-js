@@ -1,5 +1,5 @@
 "use client"
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment, OrbitControls, Plane } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Model from "@/components/PillBottle3.jsx";
 import { useEffect, useState } from "react";
@@ -27,8 +27,11 @@ export default function Home() {
         </div>
       </div> */}
       <div className="h-screen w-full fixed">
-      <Canvas camera={{zoom: 100}} orthographic>
-        <spotLight position={[0, 0, 20]} angle={1} penumbra={0.5} intensity={500}/>
+      <Canvas camera={{zoom: 100}} orthographic shadows>
+        <OrbitControls />
+        <Plane scale={20} position={[0,0,-5]} receiveShadow>
+        </Plane>
+        <spotLight position={[0, 0, 20]} angle={1} penumbra={0.5} intensity={500} castShadow/>
         <ambientLight intensity={0.6}/>
         {titles.map((product, index) => {
           const noOfModels = Math.floor(window.innerWidth / 384)

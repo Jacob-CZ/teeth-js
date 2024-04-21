@@ -32,15 +32,15 @@ export default function Model(props) {
 
   
   return (
-    <group ref={contRef} position={props.pos} onClick={props.onClick}>
+    <group ref={contRef} position={props.pos} onClick={props.onClick} castShadow>
       <a.group ref={groupRef} {...props} dispose={null} position={position} onPointerEnter={() => setHovered(true)} scale={scale} onPointerLeave={() => setHovered(false)}  >
-        <mesh geometry={nodes.Circle001.geometry} >
+        <mesh geometry={nodes.Circle001.geometry} castShadow>
           <meshStandardMaterial side={THREE.DoubleSide} roughness={0.1}  />
         </mesh>
-        <mesh geometry={nodes.Circle_1.geometry} material={materials.img_mat}>
+        <mesh geometry={nodes.Circle_1.geometry} material={materials.img_mat} castShadow>
           <meshStandardMaterial map={texture} roughness={0} transparent/>
         </mesh>
-        <mesh geometry={nodes.Circle_2.geometry} material={materials.material1}  >
+        <mesh geometry={nodes.Circle_2.geometry} material={materials.material1} castShadow >
           <meshStandardMaterial roughness={0.1}/>
         </mesh>
       </a.group>
