@@ -13,6 +13,7 @@
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
     "@react-three/postprocessing": "^2.16.2",
+    "framer-motion": "^11.1.7",
     "fs": "^0.0.1-security",
     "gltfjsx": "^6.2.16",
     "next": "14.2.1",

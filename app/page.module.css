@@ -1,0 +1,13 @@
+.mask{
+    height: 100%;
+    width: 100%;
+    background: #000;
+    z-index: 1000;
+    mask-image: url(../public/ellipse.svg);
+    mask-repeat: no-repeat;
+    mask-size: 100px;
+    background: #FCFBE4;
+    position: fixed;
+    color: black;
+    transition: mask-size 1s ease-in-out;
+}
